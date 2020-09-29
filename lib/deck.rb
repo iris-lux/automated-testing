@@ -5,15 +5,21 @@ require_relative 'card'
 
 class Deck
 
-  def initialize
+  attr_reader :cards
 
+  def initialize
+    @cards = Array.new(52){Card.new(rand(1..13), [:hearts, :spades, :clubs, :diamonds].sample)}
   end
 
   def draw
-    # returns a card
+    return @cards.delete_at(rand(0...@cards.length))
   end
 
   def shuffle
-    # shuffles the deck
+    @cards.shuffle!
+  end
+
+  def count
+    return @cards.length
   end
 end

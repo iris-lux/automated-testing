@@ -1,6 +1,9 @@
 require_relative 'test_helper'
 
 describe Card do
+  let (:card) {
+    Card.new(10, :diamonds)
+  }
   describe "You can create a Card instance" do
 
     it "Can be created" do
@@ -26,6 +29,7 @@ describe Card do
     it "to_s returns a readable String value logically for values 2-10" do
       # Test to ensure that to_s works for cards values 2-10
       # for example:  "2 of diamonds"
+      expect(card.to_s).must_equal "10 of diamonds"
     end
 
     it "to_s returns a readable String value for Ace, Jack, Queen, King" do
@@ -40,18 +44,21 @@ describe Card do
       #  11: Jack
       #  12: Queen
       #  13: King
+      face_cards = {1 => "Ace", 11 => "Jack", 12 => "Queen", 13 => "King"}
+      face_cards.each{|value, card| expect(Card.new(value, :diamonds).to_s).must_equal "#{card} of diamonds"}
+
     end
   end
 
   describe "Reader methods" do
 
     it "Can retrieve the value of the card using a `.value`." do
-      # ensure that `.value works as expected`
+      expect(card.value).must_equal 10
     end
 
     it "Can retrieve the value of the card using a `.suit`." do
       # ensure that `.suit works as expected returning the symbol of the suit`
-
+      expect(card.suit).must_equal :diamonds
     end
   end
 
